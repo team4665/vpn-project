@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=vpn-project
+Exec=vpn-project
+Icon=org.gnome.Example
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true
