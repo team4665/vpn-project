@@ -29,17 +29,35 @@ class MainWindow(Gtk.ApplicationWindow):
         super().__init__(*args, **kwargs)
         self.box1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self.box2 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        self.box3 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        center_box = Gtk.CenterBox()
+        center_box.set_center_widget(self.box2)
 
+##добавление кнопки
         self.button = Gtk.Button(label="Установить Wireguard")
         self.button.connect('clicked', self.hello)
+##добавление окон ввода текста (логина, ip и пароля)
+
+        self.ip_entry = Gtk.Entry()
+        self.ip_entry.set_text("Введите ip-адрес сервера")
+        server_ip = self.ip_entry.get_text()
+        self.login_entry = Gtk.Entry()
+        self.login_entry.set_text("Введите имя пользователя сервера")
+        server_login = self.login_entry.get_text()
+        self.passwd_entry = Gtk.PasswordEntry()
+        self.passwd_entry.set_text("Введите пароль")
+        server_passwd = self.passwd_entry.get_text()
 
         self.set_child(self.box1)  # Horizontal box to window
         self.box1.append(self.box2)  # Put vert box in that box
-        self.box1.append(self.box3)  # And another one, empty for now
+        ##self.box1.append(self.box3)  # And another one, empty for now
 
+        self.box2.append(self.ip_entry)
+        self.box2.append(self.login_entry)
+        self.box2.append(self.passwd_entry)
         self.box2.append(self.button) # Put button in the first of the two vertial boxes
-        self.set_default_size(600, 250)
+
+        self.set_default_size(1200, 500)
+        self.set_child(center_box)
         self.set_title("MyApp")
     def hello(self, button):
         print("Hello world") ##нужно будет заменить на вызов WG
